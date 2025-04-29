@@ -1,0 +1,104 @@
+---
+import Card from "../components/Card.astro";
+import type { Product } from "../types";
+
+
+// Consumir la API de productos
+const products: Product[] = await fetch("https://dummyjson.com/products")
+	.then((res) => res.json())
+	.then((res) => res.products);
+
+
+---
+<!DOCTYPE html>
+
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Listado Productos</title>
+	</head>
+	<body>
+	<header class="header" id="main-header">
+	
+		<img src="/imagenes/almacen.png" alt="Logo1 del sitio" width="75" />
+		<h1>Detalle de Productos Disponibles</h1>
+		<img src="/imagenes/online.jpg" alt="Logo2 del sitio" width="75" />
+	
+	</header>
+	
+
+	<main>
+		<div class="grid">
+			{products.map((product) => <Card product={product} />)}
+		</div>
+	</main>
+	<footer class="footer">
+		<p>
+			Realizar pedidos al correo: comprasArticulos@ventasEmpresa.com |
+			Tel: +56 9 456 7890 / +56 9 456 7891
+		</p>
+	</footer>
+</body>
+</html>
+	<style>
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background-color: #84b2d5;
+			color: #6d91c7;
+			line-height: 1.6;
+			padding: 5px;
+		}
+		#main-header {
+			display: flex;
+			justify-content: center;
+			background: #83a2ad;
+			position: fixed; /* Fija el header */
+			top: 0; /* Posición superior */
+			width: 95%; /* Ancho completo */
+			color: white; /* Color del texto */
+			height: 75px; /* Altura del header */
+			padding: 25px; /* Espaciado interno */
+			z-index: 1; /* Asegura que el header esté por encima de otros elementos */
+		}
+
+	
+		h1 {
+			text-align: center;
+			text-decoration: underline;
+			margin-bottom: 20px;
+			color: #333;
+			padding: 30px; /* Espaciado interno */
+		}
+
+		.grid {
+			display: flex;
+			flex-wrap: wrap;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 50px;
+		
+			justify-content: center;
+			max-width: 1200px;
+			margin: 0 auto;
+			display: grid;
+			padding-top: 120px; /* Ajusta el espacio superior para evitar que el contenido se oculte detrás del header */
+		}
+		@media (max-width: 600px) {
+			.grid {
+				grid-template-columns: 1fr;
+				gap: 1rem;
+			}
+		}
+		.footer {
+			display: flex;
+			flex-wrap: wrap;
+			font-family: "Arial", sans-serif; /* Cambia el tipo de letra */
+			font-size: 20px; /* Cambia el tamaño del texto */
+			margin-top: 10px;
+			justify-content: center;
+			padding: 10px;
+			font-weight: bold;
+			background-color: #56727c;
+			color: rgb(5, 0, 0);
+		}
+	</style>
+</html>

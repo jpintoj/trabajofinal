@@ -1,0 +1,72 @@
+---
+//import type { Product } from '../types';
+
+const { product } = Astro.props;
+
+---
+
+  <div class="card"> 
+     <img src={product.thumbnail} alt={product.title} class="card-img" />
+  <div class="card-body">
+    <h2 class="card-title">Producto: {product.title}</h2>
+    <p class="card-description">Descripción: {product.description}</p>
+    <div class="card-info">
+      <span class="card-price">Precio: ${product.price}</span>
+    </div>
+  </div>
+</div>
+
+<style>
+    .card {
+      background: #c8c8cc;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-50px) scale(1.03);
+    }
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin: 0 0 0.5rem 0;
+    }
+    .card-description {
+      flex: 1;
+      font-size: 0.95rem;
+      color: #3616c7;
+      margin-bottom: 0.5rem;
+    }
+    .card-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .card-price {
+      font-weight: bold;
+      color: #e23d0a;
+      font-size: 1.5rem;
+    }
+    @media (max-width: 600px) {
+      .card-img { height: 120px; }
+      .card-body { padding: 0.75rem; }
+      .card-title { font-size: 1rem; }
+    }
+    </style>
